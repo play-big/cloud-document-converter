@@ -33,14 +33,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build dependencies
-        run: |
-          pnpm --filter @dolphin/common build
-          pnpm --filter @dolphin/lark build
-          pnpm --filter @dolphin/extension-shared build
-
-      - name: Build extension code
-        run: pnpm --filter @dolphin/safari-extension build
+      - name: Build all packages
+        run: pnpm run build
 
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
