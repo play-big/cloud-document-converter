@@ -71,8 +71,7 @@
   },
   "scripts": {
     "build": "tsdown",
-    "type-check": "tsc --noEmit",
-    "test": "vitest run"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@dolphin/common": "workspace:*",
