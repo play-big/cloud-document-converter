@@ -57,10 +57,23 @@ class StorageImpl {
   }
 }
 
-type BrowserStorage = typeof browser.storage
+interface BrowserStorageArea {
+  get: (
+    keys?: string | string[] | { [name: string]: any },
+  ) => Promise<{ [name: string]: any }>
+  set: (items: { [name: string]: any }) => Promise<void>
+}
+
+interface BrowserStorage {
+  sync: BrowserStorageArea
+  local: BrowserStorageArea
+}
 
 export const storage: BrowserStorage = import.meta.env.DEV
   ? ({
       sync: new StorageImpl('sync'),
     } as BrowserStorage)
-  : browser.storage
+  : ({
+      sync: browser.storage.sync,
+      local: browser.storage.local,
+    } as BrowserStorage)
