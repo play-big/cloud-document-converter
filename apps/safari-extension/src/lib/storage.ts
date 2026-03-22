@@ -69,11 +69,14 @@ interface BrowserStorage {
   local: BrowserStorageArea
 }
 
+const devStorage: BrowserStorage = {
+  sync: new StorageImpl('sync'),
+  local: new StorageImpl('local'),
+}
+
 export const storage: BrowserStorage = import.meta.env.DEV
-  ? ({
-      sync: new StorageImpl('sync'),
-    } as BrowserStorage)
-  : ({
+  ? devStorage
+  : {
       sync: browser.storage.sync,
       local: browser.storage.local,
-    } as BrowserStorage)
+    }

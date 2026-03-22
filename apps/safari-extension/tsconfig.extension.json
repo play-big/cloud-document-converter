@@ -1,8 +1,8 @@
 {
-  "extends": "@dolphin/typescript-config/app.json",
+  "extends": "@dolphin/typescript-config/base.json",
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.extension.tsbuildinfo",
-    "types": ["@dolphin/common/env", "@types/firefox-webext-browser"],
+    "types": ["@dolphin/common/env"],
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "noEmit": true,
     "baseUrl": ".",

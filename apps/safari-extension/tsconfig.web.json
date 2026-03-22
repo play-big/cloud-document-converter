@@ -1,5 +1,5 @@
 {
-  "extends": "@dolphin/typescript-config/app.json",
+  "extends": "@dolphin/typescript-config/base.json",
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.web.tsbuildinfo",
     "types": ["@dolphin/common/env"],
@@ -10,10 +10,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "src/scripts/*.ts",
-    "src/common/*.ts",
-    "src/lib/*.ts",
-    "src/components/**/*.ts"
-  ]
+  "include": ["src/scripts/*.ts", "src/common/*.ts"]
 }

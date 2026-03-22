@@ -1,26 +1,31 @@
 /// <reference types="@types/firefox-webext-browser" />
 
-declare namespace Browser {
-  namespace scripting {
-    type ExecutionWorld = 'ISOLATED' | 'MAIN'
+type ExecutionWorld = 'ISOLATED' | 'MAIN'
 
-    interface ScriptInjection<T = string[]> {
-      injectImmediately?: boolean
-      target: {
-        tabId: number
-        frameIds?: number[]
-        allFrames?: boolean
-      }
-      files?: T
-      func?: (...args: any[]) => any
-      args?: any[]
-      world?: ExecutionWorld
+interface ScriptInjectionWithWorld {
+  files?: string[]
+  target: {
+    tabId: number
+    frameIds?: number[]
+    allFrames?: boolean
+  }
+  world?: ExecutionWorld
+  injectImmediately?: boolean
+}
+
+declare global {
+  const browser: {
+    runtime: typeof import('@types/firefox-webext-browser').runtime
+    storage: typeof import('@types/firefox-webext-browser').storage
+    tabs: typeof import('@types/firefox-webext-browser').tabs
+    contextMenus: typeof import('@types/firefox-webext-browser').contextMenus
+    i18n: typeof import('@types/firefox-webext-browser').i18n
+    scripting: {
+      executeScript(
+        injection: ScriptInjectionWithWorld,
+      ): Promise<Array<{ frameId: number; result?: unknown }>>
     }
   }
 }
 
-interface BrowserObject extends Browser.Browser {
-  scripting: Browser.scripting.Static
-}
-
-declare const browser: BrowserObject
+export {}

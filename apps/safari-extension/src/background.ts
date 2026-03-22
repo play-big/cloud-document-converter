@@ -38,6 +38,7 @@ const executeScriptByFlag = async (flag: string | number, tabId: number) => {
       await browser.scripting.executeScript({
         files: ['bundles/scripts/download-lark-docx-as-markdown.js'],
         target: { tabId },
+        // @ts-expect-error Safari supports 'MAIN' world but @types/firefox-webext-browser doesn't include it
         world: 'MAIN',
       })
       break
@@ -45,6 +46,7 @@ const executeScriptByFlag = async (flag: string | number, tabId: number) => {
       await browser.scripting.executeScript({
         files: ['bundles/scripts/copy-lark-docx-as-markdown.js'],
         target: { tabId },
+        // @ts-expect-error Safari supports 'MAIN' world but @types/firefox-webext-browser doesn't include it
         world: 'MAIN',
       })
       break
@@ -52,6 +54,7 @@ const executeScriptByFlag = async (flag: string | number, tabId: number) => {
       await browser.scripting.executeScript({
         files: ['bundles/scripts/view-lark-docx-as-markdown.js'],
         target: { tabId },
+        // @ts-expect-error Safari supports 'MAIN' world but @types/firefox-webext-browser doesn't include it
         world: 'MAIN',
       })
       break
