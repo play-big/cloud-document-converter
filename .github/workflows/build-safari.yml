@@ -8,6 +8,7 @@ on:
       - 'apps/safari-extension-app/**'
       - 'packages/extension-shared/**'
       - 'packages/lark/**'
+      - 'packages/common/**'
       - '.github/workflows/build-safari.yml'
   pull_request:
     branches: [main]
@@ -31,6 +32,12 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Build dependencies
+        run: |
+          pnpm --filter @dolphin/common build
+          pnpm --filter @dolphin/lark build
+          pnpm --filter @dolphin/extension-shared build
 
       - name: Build extension code
         run: pnpm --filter @dolphin/safari-extension build
