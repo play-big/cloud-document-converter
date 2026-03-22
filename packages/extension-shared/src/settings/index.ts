@@ -71,10 +71,7 @@ export const createGetSettings = (options: GetSettingsOptions) => {
     keys: Key[],
   ): Promise<Pick<Settings, Key>> => {
     try {
-      const settings = await port.sendAsync(
-        EventName.GetSettings,
-        keys,
-      )
+      const settings = await port.sendAsync(EventName.GetSettings, keys)
       return pick(defaultsDeep(settings, fallbackSettings), keys)
     } catch (error) {
       console.error(error)

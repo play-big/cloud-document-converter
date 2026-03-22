@@ -1,4 +1,10 @@
-import type { BrowserAPI, MenuCreateOptions, ScriptOptions, TabQueryOptions, Tab } from './types'
+import type {
+  BrowserAPI,
+  MenuCreateOptions,
+  ScriptOptions,
+  TabQueryOptions,
+  Tab,
+} from './types'
 
 export const chromeAPI: BrowserAPI = {
   contextMenus: {
@@ -49,9 +55,11 @@ export const chromeAPI: BrowserAPI = {
     },
     onMessage: {
       addListener(callback): void {
-        chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-          return callback(message, sender, sendResponse)
-        })
+        chrome.runtime.onMessage.addListener(
+          (message, sender, sendResponse) => {
+            return callback(message, sender, sendResponse)
+          },
+        )
       },
     },
     async openOptionsPage(): Promise<void> {

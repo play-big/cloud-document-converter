@@ -1,4 +1,10 @@
-import type { BrowserAPI, MenuCreateOptions, ScriptOptions, TabQueryOptions, Tab } from './types'
+import type {
+  BrowserAPI,
+  MenuCreateOptions,
+  ScriptOptions,
+  TabQueryOptions,
+  Tab,
+} from './types'
 
 export const safariAPI: BrowserAPI = {
   contextMenus: {
@@ -49,9 +55,11 @@ export const safariAPI: BrowserAPI = {
     },
     onMessage: {
       addListener(callback): void {
-        browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-          return callback(message, sender, sendResponse)
-        })
+        browser.runtime.onMessage.addListener(
+          (message, sender, sendResponse) => {
+            return callback(message, sender, sendResponse)
+          },
+        )
       },
     },
     async openOptionsPage(): Promise<void> {

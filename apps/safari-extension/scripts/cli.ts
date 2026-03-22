@@ -28,7 +28,7 @@ const copyAssets = async () => {
   const distDir = path.resolve(rootDir, 'dist')
   const resourcesDir = path.resolve(
     rootDir,
-    '../safari-extension-app/CloudDocumentConverter Extension/Resources'
+    '../safari-extension-app/CloudDocumentConverter Extension/Resources',
   )
 
   await fs.mkdir(resourcesDir, { recursive: true })
@@ -36,30 +36,30 @@ const copyAssets = async () => {
   await fs.cp(
     path.resolve(distDir, 'bundles'),
     path.resolve(resourcesDir, 'bundles'),
-    { recursive: true }
+    { recursive: true },
   )
 
   await fs.cp(
     path.resolve(distDir, 'pages'),
     path.resolve(resourcesDir, 'pages'),
-    { recursive: true }
+    { recursive: true },
   )
 
   await fs.cp(
     path.resolve(rootDir, 'images'),
     path.resolve(resourcesDir, 'images'),
-    { recursive: true }
+    { recursive: true },
   )
 
   await fs.cp(
     path.resolve(rootDir, '_locales'),
     path.resolve(resourcesDir, '_locales'),
-    { recursive: true }
+    { recursive: true },
   )
 
   await fs.copyFile(
     path.resolve(rootDir, 'manifest.json'),
-    path.resolve(resourcesDir, 'manifest.json')
+    path.resolve(resourcesDir, 'manifest.json'),
   )
 
   console.log('Assets copied successfully!')
@@ -70,23 +70,27 @@ const buildXcodeProject = async () => {
 
   const projectPath = path.resolve(
     rootDir,
-    '../safari-extension-app/CloudDocumentConverter.xcodeproj'
+    '../safari-extension-app/CloudDocumentConverter.xcodeproj',
   )
 
   try {
-    await execa('xcodebuild', [
-      '-project',
-      projectPath,
-      '-scheme',
-      'CloudDocumentConverter',
-      '-configuration',
-      'Release',
-      '-derivedDataPath',
-      path.resolve(rootDir, 'build'),
-    ], {
-      cwd: path.resolve(rootDir, '../safari-extension-app'),
-      stdio: 'inherit',
-    })
+    await execa(
+      'xcodebuild',
+      [
+        '-project',
+        projectPath,
+        '-scheme',
+        'CloudDocumentConverter',
+        '-configuration',
+        'Release',
+        '-derivedDataPath',
+        path.resolve(rootDir, 'build'),
+      ],
+      {
+        cwd: path.resolve(rootDir, '../safari-extension-app'),
+        stdio: 'inherit',
+      },
+    )
 
     console.log('Xcode build completed!')
   } catch (error) {
@@ -97,19 +101,17 @@ const buildXcodeProject = async () => {
 
 const cli = cac()
 
-cli
-  .command('build', 'Build Safari extension')
-  .action(async () => {
-    try {
-      await buildExtension()
-      await buildPages()
-      await copyAssets()
-      console.log('Safari extension build complete!')
-    } catch (error) {
-      console.error('Build failed:', error)
-      process.exit(1)
-    }
-  })
+cli.command('build', 'Build Safari extension').action(async () => {
+  try {
+    await buildExtension()
+    await buildPages()
+    await copyAssets()
+    console.log('Safari extension build complete!')
+  } catch (error) {
+    console.error('Build failed:', error)
+    process.exit(1)
+  }
+})
 
 cli
   .command('build:xcode', 'Build Xcode project (requires Xcode)')

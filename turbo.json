@@ -9,7 +9,11 @@
     },
     "build:safari": {
       "outputs": ["dist/**", "CloudDocumentConverter Extension/Resources/**"],
-      "dependsOn": ["@dolphin/extension-shared#build", "@dolphin/lark#build", "@dolphin/common#build"],
+      "dependsOn": [
+        "@dolphin/extension-shared#build",
+        "@dolphin/lark#build",
+        "@dolphin/common#build"
+      ],
       "cache": true
     },
     "type-check": {
