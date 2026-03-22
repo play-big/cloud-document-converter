@@ -8,6 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig(({ mode }) => ({
   base: '/pages/',
+  publicDir: resolve(__dirname, 'public'),
   plugins: [vue(), tailwindcss()],
   build: {
     rollupOptions: {
