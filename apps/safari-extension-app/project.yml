@@ -48,12 +48,16 @@ targets:
       - path: CloudDocumentConverter Extension/Resources/manifest.json
         buildPhase: resources
       - path: CloudDocumentConverter Extension/Resources/_locales
+        type: folder
         buildPhase: resources
       - path: CloudDocumentConverter Extension/Resources/bundles
+        type: folder
         buildPhase: resources
       - path: CloudDocumentConverter Extension/Resources/images
+        type: folder
         buildPhase: resources
       - path: CloudDocumentConverter Extension/Resources/pages
+        type: folder
         buildPhase: resources
     settings:
       base:
