@@ -4,7 +4,12 @@
     "build": {
       "outputs": ["dist/**"],
       "dependsOn": ["^build"],
-      "inputs": ["apps/chrome-extension/src/**/*", "packages/**/src/**/*"],
+      "inputs": ["apps/*/src/**/*", "packages/**/src/**/*"],
+      "cache": true
+    },
+    "build:safari": {
+      "outputs": ["dist/**", "CloudDocumentConverter Extension/Resources/**"],
+      "dependsOn": ["@dolphin/extension-shared#build", "@dolphin/lark#build", "@dolphin/common#build"],
       "cache": true
     },
     "type-check": {

@@ -1,0 +1,13 @@
+{
+  "name": "@dolphin/safari-extension-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "generate:xcode": "xcodegen -c Release",
+    "build:xcode": "xcodebuild -project CloudDocumentConverter.xcodeproj -scheme CloudDocumentConverter -configuration Release",
+    "copy:resources": "node ../safari-extension/scripts/cli.ts copy"
+  },
+  "volta": {
+    "extends": "../../package.json"
+  }
+}

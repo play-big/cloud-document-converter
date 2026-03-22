@@ -1,0 +1,9 @@
+{
+  "extends": "@dolphin/typescript-config/lib.json",
+  "compilerOptions": {
+    "declarationDir": "dist",
+    "types": ["chrome-types"],
+    "lib": ["ES2022", "DOM"]
+  },
+  "include": ["src"]
+}

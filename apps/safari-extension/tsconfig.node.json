@@ -1,0 +1,4 @@
+{
+  "extends": "@dolphin/typescript-config/node.json",
+  "include": ["scripts", "tsdown.config.ts", "vite.config.ts"]
+}

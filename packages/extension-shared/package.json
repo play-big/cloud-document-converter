@@ -1,0 +1,97 @@
+{
+  "name": "@dolphin/extension-shared",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "dev": "./src/index.ts",
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./api": {
+      "dev": "./src/api/index.ts",
+      "types": "./dist/api/index.d.mts",
+      "default": "./dist/api/index.mjs"
+    },
+    "./api/chrome": {
+      "dev": "./src/api/chrome.ts",
+      "types": "./dist/api/chrome.d.mts",
+      "default": "./dist/api/chrome.mjs"
+    },
+    "./api/safari": {
+      "dev": "./src/api/safari.ts",
+      "types": "./dist/api/safari.d.mts",
+      "default": "./dist/api/safari.mjs"
+    },
+    "./background": {
+      "dev": "./src/background/index.ts",
+      "types": "./dist/background/index.d.mts",
+      "default": "./dist/background/index.mjs"
+    },
+    "./content": {
+      "dev": "./src/content/index.ts",
+      "types": "./dist/content/index.d.mts",
+      "default": "./dist/content/index.mjs"
+    },
+    "./scripts": {
+      "dev": "./src/scripts/index.ts",
+      "types": "./dist/scripts/index.d.mts",
+      "default": "./dist/scripts/index.mjs"
+    },
+    "./settings": {
+      "dev": "./src/settings/index.ts",
+      "types": "./dist/settings/index.d.mts",
+      "default": "./dist/settings/index.mjs"
+    },
+    "./i18n": {
+      "dev": "./src/i18n/index.ts",
+      "types": "./dist/i18n/index.d.mts",
+      "default": "./dist/i18n/index.mjs"
+    },
+    "./notification": {
+      "dev": "./src/notification/index.ts",
+      "types": "./dist/notification/index.d.mts",
+      "default": "./dist/notification/index.mjs"
+    },
+    "./issue": {
+      "dev": "./src/issue/index.ts",
+      "types": "./dist/issue/index.d.mts",
+      "default": "./dist/issue/index.mjs"
+    },
+    "./utils": {
+      "dev": "./src/utils/index.ts",
+      "types": "./dist/utils/index.d.mts",
+      "default": "./dist/utils/index.mjs"
+    },
+    "./message": {
+      "dev": "./src/message/index.ts",
+      "types": "./dist/message/index.d.mts",
+      "default": "./dist/message/index.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@dolphin/common": "workspace:*",
+    "@dolphin/lark": "workspace:*",
+    "i18next": "catalog:i18n",
+    "es-toolkit": "catalog:prod",
+    "browser-fs-access": "catalog:network",
+    "hast-util-to-html": "catalog:prod",
+    "mdast-util-to-hast": "catalog:prod",
+    "uuid": "catalog:prod",
+    "serialize-error": "catalog:prod"
+  },
+  "devDependencies": {
+    "chrome-types": "catalog:dev",
+    "@types/firefox-webext-browser": "^120.0.4",
+    "@types/uuid": "^10.0.0",
+    "typescript": "catalog:dev"
+  },
+  "volta": {
+    "extends": "../../package.json"
+  }
+}

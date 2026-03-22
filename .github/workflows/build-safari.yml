@@ -1,0 +1,73 @@
+name: Build Safari Extension
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/safari-extension/**'
+      - 'apps/safari-extension-app/**'
+      - 'packages/extension-shared/**'
+      - 'packages/lark/**'
+      - '.github/workflows/build-safari.yml'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build extension code
+        run: pnpm --filter @dolphin/safari-extension build
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.0'
+
+      - name: Generate Xcode project
+        run: |
+          brew install xcodegen
+          cd apps/safari-extension-app
+          xcodegen
+
+      - name: Build Safari Extension (unsigned)
+        run: |
+          cd apps/safari-extension-app
+          xcodebuild \
+            -project CloudDocumentConverter.xcodeproj \
+            -scheme CloudDocumentConverter \
+            -configuration Release \
+            -derivedDataPath build \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Create ZIP archive
+        run: |
+          cd apps/safari-extension-app/build/Build/Products/Release
+          zip -r CloudDocumentConverter.zip CloudDocumentConverter.app
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CloudDocumentConverter-Safari
+          path: apps/safari-extension-app/build/Build/Products/Release/CloudDocumentConverter.zip
+          retention-days: 30

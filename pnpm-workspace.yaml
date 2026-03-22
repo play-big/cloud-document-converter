@@ -87,6 +87,7 @@ catalogs:
     '@types/mdast': ^4.0.4
     '@types/node': 22.12.0
     '@types/regexp.escape': 2.0.0
+    '@types/uuid': ^10.0.0
   utils:
     lodash-es: ^4.17.21
     regexp.escape: 2.0.1
