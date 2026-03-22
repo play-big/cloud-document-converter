@@ -43,6 +43,16 @@ targets:
       - path: CloudDocumentConverter Extension
         excludes:
           - '**/.DS_Store'
+          - 'Resources/**'
+        buildPhase: none
+    copyFiles:
+      Resources:
+        destination: resources
+        subpath: .
+        files:
+          - path: CloudDocumentConverter Extension/Resources
+            excludes:
+              - '**/.DS_Store'
     settings:
       base:
         INFOPLIST_FILE: CloudDocumentConverter Extension/Info.plist
