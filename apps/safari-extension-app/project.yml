@@ -40,19 +40,16 @@ targets:
     type: app-extension
     platform: macOS
     sources:
-      - path: CloudDocumentConverter Extension
+      - path: CloudDocumentConverter Extension/SafariExtensionHandler.swift
+      - path: CloudDocumentConverter Extension/Info.plist
+        buildPhase: none
+      - path: CloudDocumentConverter Extension/CloudDocumentConverter Extension.entitlements
+        buildPhase: none
+      - path: CloudDocumentConverter Extension/Resources
+        type: folder
+        buildPhase: resources
         excludes:
           - '**/.DS_Store'
-          - 'Resources/**'
-        buildPhase: none
-    copyFiles:
-      Resources:
-        destination: resources
-        subpath: .
-        files:
-          - path: CloudDocumentConverter Extension/Resources
-            excludes:
-              - '**/.DS_Store'
     settings:
       base:
         INFOPLIST_FILE: CloudDocumentConverter Extension/Info.plist
