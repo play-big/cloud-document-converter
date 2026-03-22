@@ -45,11 +45,16 @@ targets:
         buildPhase: none
       - path: CloudDocumentConverter Extension/CloudDocumentConverter Extension.entitlements
         buildPhase: none
-      - path: CloudDocumentConverter Extension/Resources
-        type: folder
+      - path: CloudDocumentConverter Extension/Resources/manifest.json
         buildPhase: resources
-        excludes:
-          - '**/.DS_Store'
+      - path: CloudDocumentConverter Extension/Resources/_locales
+        buildPhase: resources
+      - path: CloudDocumentConverter Extension/Resources/bundles
+        buildPhase: resources
+      - path: CloudDocumentConverter Extension/Resources/images
+        buildPhase: resources
+      - path: CloudDocumentConverter Extension/Resources/pages
+        buildPhase: resources
     settings:
       base:
         INFOPLIST_FILE: CloudDocumentConverter Extension/Info.plist
