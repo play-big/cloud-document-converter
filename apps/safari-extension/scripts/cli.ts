@@ -4,9 +4,10 @@ import { execa } from 'execa'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { glob } from 'glob'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const rootDir = path.resolve(__dirname, '..')
 
 const buildExtension = async () => {
   console.log('Building extension scripts...')
@@ -16,7 +17,7 @@ const buildExtension = async () => {
 const buildPages = async () => {
   console.log('Building Vue pages...')
   await execa('vite', ['build'], {
-    cwd: __dirname,
+    cwd: rootDir,
     stdio: 'inherit',
   })
 }
@@ -24,9 +25,9 @@ const buildPages = async () => {
 const copyAssets = async () => {
   console.log('Copying assets...')
 
-  const distDir = path.resolve(__dirname, 'dist')
+  const distDir = path.resolve(rootDir, 'dist')
   const resourcesDir = path.resolve(
-    __dirname,
+    rootDir,
     '../safari-extension-app/CloudDocumentConverter Extension/Resources'
   )
 
@@ -45,19 +46,19 @@ const copyAssets = async () => {
   )
 
   await fs.cp(
-    path.resolve(__dirname, 'images'),
+    path.resolve(rootDir, 'images'),
     path.resolve(resourcesDir, 'images'),
     { recursive: true }
   )
 
   await fs.cp(
-    path.resolve(__dirname, '_locales'),
+    path.resolve(rootDir, '_locales'),
     path.resolve(resourcesDir, '_locales'),
     { recursive: true }
   )
 
   await fs.copyFile(
-    path.resolve(__dirname, 'manifest.json'),
+    path.resolve(rootDir, 'manifest.json'),
     path.resolve(resourcesDir, 'manifest.json')
   )
 
@@ -68,7 +69,7 @@ const buildXcodeProject = async () => {
   console.log('Building Xcode project...')
 
   const projectPath = path.resolve(
-    __dirname,
+    rootDir,
     '../safari-extension-app/CloudDocumentConverter.xcodeproj'
   )
 
@@ -81,9 +82,9 @@ const buildXcodeProject = async () => {
       '-configuration',
       'Release',
       '-derivedDataPath',
-      path.resolve(__dirname, 'build'),
+      path.resolve(rootDir, 'build'),
     ], {
-      cwd: path.resolve(__dirname, '../safari-extension-app'),
+      cwd: path.resolve(rootDir, '../safari-extension-app'),
       stdio: 'inherit',
     })
 
