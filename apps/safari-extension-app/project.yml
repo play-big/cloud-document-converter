@@ -49,6 +49,7 @@ targets:
         INFOPLIST_FILE: CloudDocumentConverter Extension/Info.plist
         CODE_SIGN_ENTITLEMENTS: CloudDocumentConverter Extension/CloudDocumentConverter Extension.entitlements
         PRODUCT_BUNDLE_IDENTIFIER: com.dolphin.CloudDocumentConverter.Extension
+        PRODUCT_MODULE_NAME: CloudDocumentConverterExtension
         ENABLE_HARDENED_RUNTIME: YES
     dependencies:
       - sdk: SafariServices.framework
