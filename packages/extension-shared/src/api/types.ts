@@ -51,8 +51,8 @@ export interface BrowserAPI {
         callback: (
           message: unknown,
           sender: unknown,
-          sendResponse: (response?: unknown) => void
-        ) => boolean | void
+          sendResponse: (response?: unknown) => void,
+        ) => boolean | undefined,
       ): void
     }
     openOptionsPage(): Promise<void>

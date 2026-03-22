@@ -23,7 +23,7 @@ export interface SetupContextMenuOptions {
 
 export const setupContextMenu = (
   api: BrowserAPI,
-  options: SetupContextMenuOptions
+  options: SetupContextMenuOptions,
 ): void => {
   const { i18n } = options
 
@@ -58,7 +58,7 @@ export interface ExecuteScriptByFlagOptions {
 export const executeScriptByFlag = async (
   flag: string | number,
   tabId: number,
-  options: ExecuteScriptByFlagOptions
+  options: ExecuteScriptByFlagOptions,
 ): Promise<void> => {
   const { onDownload, onCopy, onView } = options
 
@@ -77,11 +77,11 @@ export const executeScriptByFlag = async (
   }
 }
 
-export interface SetupMessageHandlerOptions extends ExecuteScriptByFlagOptions {}
+export type SetupMessageHandlerOptions = ExecuteScriptByFlagOptions
 
 export const setupMessageHandler = (
   api: BrowserAPI,
-  options: SetupMessageHandlerOptions
+  options: SetupMessageHandlerOptions,
 ): void => {
   api.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     const msg = message as { flag: string }
@@ -107,11 +107,13 @@ export const setupMessageHandler = (
 
 export const setupContextMenuClickHandler = (
   api: BrowserAPI,
-  options: ExecuteScriptByFlagOptions
+  options: ExecuteScriptByFlagOptions,
 ): void => {
-  api.contextMenus.onClicked.addListener(({ menuItemId, tab }: MenuClickEvent) => {
-    if (tab?.id !== undefined) {
-      executeScriptByFlag(menuItemId, tab.id, options).catch(console.error)
-    }
-  })
+  api.contextMenus.onClicked.addListener(
+    ({ menuItemId, tab }: MenuClickEvent) => {
+      if (tab?.id !== undefined) {
+        executeScriptByFlag(menuItemId, tab.id, options).catch(console.error)
+      }
+    },
+  )
 }
